@@ -7,7 +7,6 @@ function keyPress(event) {
 function submit() {
     var phrase = document.getElementById('input').value;
     var fileUrl = download(phrase);
-    alert(fileUrl);
     display(phrase, fileUrl);
 }
 
@@ -20,4 +19,12 @@ function download(phrase) {
     xmlHttp.send(null);
 
     return xmlHttp.responseText;
+}
+
+function display(phrase, fileUrl) {
+    var link = document.createElement('a');
+    link.text = phrase;
+    link.href = "http://ncpzvf.babbage.cs.missouri.edu/spoken/download.php?path=" + phrase + '.mp3';
+    link.target = "_blank";
+    document.body.appendChild(link);
 }
