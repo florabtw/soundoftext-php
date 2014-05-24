@@ -1,5 +1,6 @@
 <?php
-$file = 'audio/' . $_GET['fileName'];
+$fileName = $_GET['fileName'];
+$file = 'audio/' . $fileName;
 
 if (file_exists($file)) {
   header('Content-Description: File Transfer');
@@ -13,6 +14,8 @@ if (file_exists($file)) {
   ob_clean();
   flush();
   readfile($file);
-  exit;
+} else {
+  header('HTTP/1.0 404 Not Found');
+  echo 'File ' . $fileName . ' does not exist!';
 }
 ?>
