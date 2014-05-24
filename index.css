@@ -1,0 +1,38 @@
+body {
+  font-family: sans-serif;
+  width: 960px;
+  margin: 0 auto;
+}
+
+.container {
+  background: #999;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.btn-play {
+  font-family: sans-serif;
+  border: none;
+  font-size: 18px;
+  padding: 5px;
+  background: #318CE7;
+  color: #FFF;
+}
+
+.btn-download {
+  background: #318CE7;
+  font-size: 18px;
+  padding: 5px;
+  text-decoration: none;
+  color: #FFF;
+}
+
+#submit-form {
+  display: table;
+  margin: 0 auto;
+}
+
+#input {
+  width: 200px;
+  padding: 2px;
+}

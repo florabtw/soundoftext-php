@@ -1,5 +1,5 @@
 <?php
-$file = 'audio/' . $_GET['path'];
+$file = $_GET['path'];
 
 if (file_exists($file)) {
   header('Content-Description: File Transfer');
