@@ -1,3 +1,10 @@
+var constants = {
+    SERVER_DOWNLOAD_URL:
+        "https://ncpzvf.babbage.cs.missouri.edu/spoken/server-download.php?text=",
+    USER_DOWNLOAD_URL:
+        "https://ncpzvf.babbage.cs.missouri.edu/spoken/user-download.php?fileName="
+};
+
 function keyPress(event) {
     if (event.keyCode == 13) {
         document.getElementById('submit').click();
@@ -15,9 +22,7 @@ function submit() {
 }
 
 function download(phrase) {
-    var url = "https://ncpzvf.babbage.cs.missouri.edu/spoken/save.php?input=";
-    url += phrase;
-
+    var url = constants.SERVER_DOWNLOAD_URL + phrase;
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", url, false);
     xmlHttp.send(null);
@@ -68,7 +73,10 @@ function genPlayButton(filePath) {
 function genDownloadButton(filePath) {
     var btnDownload = document.createElement('a');
     btnDownload.className += "btn-download";
-    btnDownload.href = "http://ncpzvf.babbage.cs.missouri.edu/spoken/download.php?path=" + filePath;
+
+    var fileName = filePath.split('/').pop();
+    btnDownload.href = constants.USER_DOWNLOAD_URL + fileName;
+
     btnDownload.appendChild(document.createTextNode("Download"));
     return btnDownload;
 }
