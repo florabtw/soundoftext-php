@@ -6,13 +6,17 @@
     <script src="interactive.js" type="text/javascript"></script>
   </head>
   <body>
-    <div class="container">
-      <div id="submit-form">
-        <input id="input" type="text" onkeydown="keyPress(event)">
-        <input id="submit" type="button" onclick="submit(); return false;" value="Submit">
+    <div class="outer">
+      <div class="middle">
+        <div class="container">
+          <div id="submit-form">
+            <input id="input" type="text" onkeydown="keyPress(event)">
+            <input id="submit" type="button" onclick="submit(); return false;" value="Submit">
+          </div>
+          <table id="links-table">
+          </table>
+        </div>
       </div>
-      <table id="links-table">
-      </table>
     </div>
   </body>
 </html>

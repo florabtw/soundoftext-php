@@ -1,13 +1,33 @@
 body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
   font-family: sans-serif;
-  width: 960px;
-  margin: 0 auto;
+  background: #8BC;
+}
+
+.outer {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: table;
+  position: absolute;
+}
+
+.middle {
+  display: table-cell;
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
 }
 
 .container {
-  background: #999;
-  width: 60%;
+  background: #FFF;
+  width: 600px;
   margin: 0 auto;
+  padding: 10px;
 }
 
 .btn-play {
