@@ -18,6 +18,12 @@ function play(audioId) {
 function submit() {
     var phrase = document.getElementById('input').value;
     var filePath = download(phrase);
+
+    var listHeader = document.getElementById('list-header');
+    if (listHeader.style.display === "") {
+        listHeader.style.display = "block";
+    }
+
     display(phrase, filePath);
 }
 
@@ -63,8 +69,8 @@ function genAudio(filePath) {
 }
 
 function genPlayButton(filePath) {
-    var btnPlay = document.createElement('button');
-    btnPlay.className += "btn-play";
+    var btnPlay = document.createElement('div');
+    btnPlay.className += "btn";
     btnPlay.onclick = function() { play(filePath) }
     btnPlay.appendChild(document.createTextNode("Play"));
     return btnPlay;
@@ -72,11 +78,11 @@ function genPlayButton(filePath) {
 
 function genDownloadButton(filePath) {
     var btnDownload = document.createElement('a');
-    btnDownload.className += "btn-download";
+    btnDownload.className += "btn btn-save";
 
     var fileName = filePath.split('/').pop();
     btnDownload.href = constants.USER_DOWNLOAD_URL + fileName;
 
-    btnDownload.appendChild(document.createTextNode("Download"));
+    btnDownload.appendChild(document.createTextNode("Save"));
     return btnDownload;
 }
