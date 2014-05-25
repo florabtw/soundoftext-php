@@ -16,14 +16,16 @@ function play(audioId) {
 }
 
 function submit() {
-    var phrase = document.getElementById('input').value;
-    var filePath = download(phrase);
-
     var listHeader = document.getElementById('list-header');
     if (listHeader.style.display === "") {
         listHeader.style.display = "block";
     }
 
+    var input = document.getElementById('input');
+    var phrase = input.value;
+    input.value = "";
+
+    var filePath = download(phrase);
     display(phrase, filePath);
 }
 
