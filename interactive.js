@@ -1,3 +1,5 @@
+/* Helper constants and functions */
+
 var constants = {
     SERVER_DOWNLOAD_URL:
         "https://ncpzvf.babbage.cs.missouri.edu/spoken/server-download.php",
@@ -8,15 +10,27 @@ var constants = {
 /* Shortcut for document.getElementById */
 var $ = function(id) { return document.getElementById(id); };
 
+function play(audioId) {
+    $(audioId).play();
+}
+
+function addClass(element, newClass) {
+    if (element.className == "") {
+        element.className += newClass;
+    } else {
+        element.className += ' ' + newClass;
+    }
+}
+
+/* Click 'submit' when pressing Enter in the input box */
+
 function keyPress(event) {
     if (event.keyCode == 13) {
         $('submit').click();
     }
 }
 
-function play(audioId) {
-    $(audioId).play();
-}
+/* Download file and display new row */
 
 function submit() {
     var listHeader = $('list-header');
@@ -36,6 +50,8 @@ function submit() {
     display(filePath);
 }
 
+/* Download file to server */
+
 function download(text, languageId, languageName) {
     var url = constants.SERVER_DOWNLOAD_URL
     url += "?text=" + text + "&id=" + languageId + "&name=" + languageName;
@@ -47,15 +63,25 @@ function download(text, languageId, languageName) {
     return xmlHttp.responseText;
 }
 
+/* Display new row */
+
 function display(filePath) {
     var table = $('results-table');
     var row = table.insertRow(0);
-    row.className += 'results-row';
+    addClass(row, 'results-row');
+
+    alternateBackground(table, row);
 
     displayAudio(row, filePath);
     displayText(row, filePath);
     displayPlayButton(row, filePath);
     displaySaveButton(row, filePath);
+}
+
+function alternateBackground(table, row) {
+    if (table.rows.length % 2 == 1) {
+        addClass(row, 'color-row');
+    }
 }
 
 function displayAudio(row, filePath) {
@@ -79,12 +105,12 @@ function displayPlayButton(row, filePath) {
     var btnPlay = genPlayButton(filePath);
     var btnPlayCell = row.insertCell(1);
     btnPlayCell.appendChild(btnPlay);
-    btnPlayCell.className += 'btn-cell';
+    addClass(btnPlayCell, 'btn-cell');
 }
 
 function genPlayButton(filePath) {
     var btnPlay = document.createElement('div');
-    btnPlay.className += "btn";
+    addClass(btnPlay, "btn");
     btnPlay.onclick = function() { play(filePath) }
     btnPlay.appendChild(document.createTextNode("Play"));
     return btnPlay;
@@ -94,12 +120,13 @@ function displaySaveButton(row, filePath) {
     var btnSave = genSaveButton(filePath);
     var btnSaveCell = row.insertCell(2);
     btnSaveCell.appendChild(btnSave);
-    btnSaveCell.className += 'btn-cell';
+    addClass(btnSaveCell, 'btn-cell');
 }
 
 function genSaveButton(filePath) {
     var btnSave = document.createElement('a');
-    btnSave.className += "btn btn-save";
+    addClass(btnSave, "btn");
+    addClass(btnSave, "btn-save");
 
     btnSave.href = constants.USER_DOWNLOAD_URL;
     btnSave.href += "&file=" + filePath;
@@ -112,5 +139,5 @@ function displayText(row, filePath) {
     var text = document.createTextNode(filePath);
     var textCell = row.insertCell(0);
     textCell.appendChild(text);
-    textCell.className += 'text-cell';
+    addClass(textCell, 'text-cell');
 }

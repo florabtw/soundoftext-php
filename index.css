@@ -47,8 +47,11 @@ select {
 
 .text-cell {
   width: 100%;
-  background: #E9FAFA;
   word-break: break-all;
+}
+
+.color-row .text-cell {
+  background: #E9FAFA;
 }
 
 /* Center content */
