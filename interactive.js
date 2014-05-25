@@ -37,23 +37,19 @@ function download(phrase) {
 }
 
 function display(phrase, filePath) {
-    var table = document.getElementById('links-table');
+    var table = document.getElementById('results-table');
     var row = table.insertRow(table.rows.length);
+    row.className += 'results-row';
 
+    displayAudio(row, filePath);
+    displayText(row, phrase);
+    displayPlayButton(row, filePath);
+    displaySaveButton(row, filePath);
+}
+
+function displayAudio(row, filePath) {
     var audio = genAudio(filePath);
     row.appendChild(audio);
-
-    var btnPlay = genPlayButton(filePath);
-    var btnPlayCell = row.insertCell(0);
-    btnPlayCell.appendChild(btnPlay);
-
-    var btnDownload = genDownloadButton(filePath);
-    var btnDownloadCell = row.insertCell(1);
-    btnDownloadCell.appendChild(btnDownload);
-
-    var text = document.createTextNode(phrase);
-    var textCell = row.insertCell(2);
-    textCell.appendChild(text);
 }
 
 function genAudio(filePath) {
@@ -68,6 +64,13 @@ function genAudio(filePath) {
     return audio;
 }
 
+function displayPlayButton(row, filePath) {
+    var btnPlay = genPlayButton(filePath);
+    var btnPlayCell = row.insertCell(1);
+    btnPlayCell.appendChild(btnPlay);
+    btnPlayCell.className += 'btn-cell';
+}
+
 function genPlayButton(filePath) {
     var btnPlay = document.createElement('div');
     btnPlay.className += "btn";
@@ -76,13 +79,27 @@ function genPlayButton(filePath) {
     return btnPlay;
 }
 
+function displaySaveButton(row, filePath) {
+    var btnSave = genDownloadButton(filePath);
+    var btnSaveCell = row.insertCell(2);
+    btnSaveCell.appendChild(btnSave);
+    btnSaveCell.className += 'btn-cell';
+}
+
 function genDownloadButton(filePath) {
-    var btnDownload = document.createElement('a');
-    btnDownload.className += "btn btn-save";
+    var btnSave = document.createElement('a');
+    btnSave.className += "btn btn-save";
 
     var fileName = filePath.split('/').pop();
-    btnDownload.href = constants.USER_DOWNLOAD_URL + fileName;
+    btnSave.href = constants.USER_DOWNLOAD_URL + fileName;
 
-    btnDownload.appendChild(document.createTextNode("Save"));
-    return btnDownload;
+    btnSave.appendChild(document.createTextNode("Save"));
+    return btnSave;
+}
+
+function displayText(row, phrase) {
+    var text = document.createTextNode(phrase);
+    var textCell = row.insertCell(0);
+    textCell.appendChild(text);
+    textCell.className += 'text-cell';
 }
