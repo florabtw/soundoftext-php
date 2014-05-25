@@ -22,7 +22,7 @@ h2 {
 
 td {
   font-size: 20px;
-  padding: 0 3px;
+  padding: 5px 3px;
 }
 
 a {
@@ -45,14 +45,10 @@ select {
   width: 100%;
 }
 
-.results-row {
-  display: block;
-  margin: 5px 0;
-}
-
 .text-cell {
   width: 100%;
   background: #E9FAFA;
+  word-break: break-all;
 }
 
 /* Center content */

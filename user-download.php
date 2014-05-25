@@ -1,6 +1,8 @@
 <?php
-$fileName = $_GET['fileName'];
-$file = 'audio/' . $fileName;
+$file = $_GET['file'];
+
+/* Attempt at stopping tomfoolery */
+if ($file[0] == '.' || strpos($file, '/../') !== false) exit;
 
 if (file_exists($file)) {
   header('Content-Description: File Transfer');

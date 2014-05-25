@@ -1,36 +1,45 @@
 var constants = {
     SERVER_DOWNLOAD_URL:
-        "https://ncpzvf.babbage.cs.missouri.edu/spoken/server-download.php?text=",
+        "https://ncpzvf.babbage.cs.missouri.edu/spoken/server-download.php",
     USER_DOWNLOAD_URL:
-        "https://ncpzvf.babbage.cs.missouri.edu/spoken/user-download.php?fileName="
+        "https://ncpzvf.babbage.cs.missouri.edu/spoken/user-download.php?"
 };
+
+/* Shortcut for document.getElementById */
+var $ = function(id) { return document.getElementById(id); };
 
 function keyPress(event) {
     if (event.keyCode == 13) {
-        document.getElementById('submit').click();
+        $('submit').click();
     }
 }
 
 function play(audioId) {
-    document.getElementById(audioId).play();
+    $(audioId).play();
 }
 
 function submit() {
-    var listHeader = document.getElementById('list-header');
+    var listHeader = $('list-header');
     if (listHeader.style.display === "") {
         listHeader.style.display = "block";
     }
 
-    var input = document.getElementById('input');
-    var phrase = input.value;
+    var input = $('input');
+    var text = input.value;
     input.value = "";
 
-    var filePath = download(phrase);
-    display(phrase, filePath);
+    var langSelect = $('lang-select');
+    var languageId = langSelect.value;
+    var languageName = langSelect.options[langSelect.selectedIndex].innerHTML
+
+    var filePath = download(text, languageId, languageName);
+    display(filePath);
 }
 
-function download(phrase) {
-    var url = constants.SERVER_DOWNLOAD_URL + phrase;
+function download(text, languageId, languageName) {
+    var url = constants.SERVER_DOWNLOAD_URL
+    url += "?text=" + text + "&id=" + languageId + "&name=" + languageName;
+
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", url, false);
     xmlHttp.send(null);
@@ -38,13 +47,13 @@ function download(phrase) {
     return xmlHttp.responseText;
 }
 
-function display(phrase, filePath) {
-    var table = document.getElementById('results-table');
+function display(filePath) {
+    var table = $('results-table');
     var row = table.insertRow(0);
     row.className += 'results-row';
 
     displayAudio(row, filePath);
-    displayText(row, phrase);
+    displayText(row, filePath);
     displayPlayButton(row, filePath);
     displaySaveButton(row, filePath);
 }
@@ -82,25 +91,25 @@ function genPlayButton(filePath) {
 }
 
 function displaySaveButton(row, filePath) {
-    var btnSave = genDownloadButton(filePath);
+    var btnSave = genSaveButton(filePath);
     var btnSaveCell = row.insertCell(2);
     btnSaveCell.appendChild(btnSave);
     btnSaveCell.className += 'btn-cell';
 }
 
-function genDownloadButton(filePath) {
+function genSaveButton(filePath) {
     var btnSave = document.createElement('a');
     btnSave.className += "btn btn-save";
 
-    var fileName = filePath.split('/').pop();
-    btnSave.href = constants.USER_DOWNLOAD_URL + fileName;
+    btnSave.href = constants.USER_DOWNLOAD_URL;
+    btnSave.href += "&file=" + filePath;
 
     btnSave.appendChild(document.createTextNode("Save"));
     return btnSave;
 }
 
-function displayText(row, phrase) {
-    var text = document.createTextNode(phrase);
+function displayText(row, filePath) {
+    var text = document.createTextNode(filePath);
     var textCell = row.insertCell(0);
     textCell.appendChild(text);
     textCell.className += 'text-cell';
