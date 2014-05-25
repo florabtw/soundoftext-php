@@ -33,14 +33,16 @@ function keyPress(event) {
 /* Download file and display new row */
 
 function submit() {
+    var input = $('input');
+    var text = input.value;
+
+    if (text == "") return;
+    input.value = "";
+
     var listHeader = $('list-header');
     if (listHeader.style.display === "") {
         listHeader.style.display = "block";
     }
-
-    var input = $('input');
-    var text = input.value;
-    input.value = "";
 
     var langSelect = $('lang-select');
     var languageId = langSelect.value;
@@ -54,7 +56,8 @@ function submit() {
 
 function download(text, languageId, languageName) {
     var url = constants.SERVER_DOWNLOAD_URL
-    url += "?text=" + text + "&id=" + languageId + "&name=" + languageName;
+    url += "?text=" + encodeURI(text) + "&id=" + languageId;
+    url += "&name=" + languageName;
 
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", url, false);
