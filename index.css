@@ -30,6 +30,14 @@ a {
   color: #1A6868;
 }
 
+select {
+  border: none;
+  padding: 4px;
+  font-size: 18px;
+  background: white;
+  border: 2px solid #1A6868;
+}
+
 /* Results list */
 
 #results-table {
