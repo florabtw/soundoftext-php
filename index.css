@@ -6,12 +6,12 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: #63A3D0;
+  background: #008B8B;
 }
 
 h2 {
-  color: #0772A1;
-  margin: 10px 0;
+  color: #1A6868;
+  margin: 5px 0;
   padding: 0;
 }
 
@@ -68,7 +68,7 @@ td {
   display: inline-block;
   font-size: 15px;
   cursor: pointer;
-  background: #0772A1;
+  background: #1A6868;
   color: #FFF;
   padding: 10px;
 }
@@ -81,7 +81,7 @@ td {
 
 #submit-form {
   display: table;
-  margin: 0 auto 5px;
+  margin: 0 auto 10px;
 }
 
 #input {
@@ -89,7 +89,7 @@ td {
   padding: 5px;
   margin: 5px 0;
   font-size: 18px;
-  border: 2px solid #0772A1;
+  border: 2px solid #1A6868;
 }
 
 #submit {

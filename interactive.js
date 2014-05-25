@@ -38,7 +38,7 @@ function download(phrase) {
 
 function display(phrase, filePath) {
     var table = document.getElementById('results-table');
-    var row = table.insertRow(table.rows.length);
+    var row = table.insertRow(0);
     row.className += 'results-row';
 
     displayAudio(row, filePath);
