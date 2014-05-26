@@ -1,4 +1,17 @@
 <?php
+/* Fix bug in PHP <= 5.3 which causes basename() to malfunction if first
+ * character of file name is not in ASCII charset */
+function safe_basename($path) {
+    if (strpos($path, '/') === false) {
+        $name = basename(' ' . $path);
+    } else {
+        $path= str_replace('/', '/ ', $path);
+        $name = basename($path);
+    }
+
+    return substr($name, 1);
+}
+
 $file = '/mnt/my-data/audio/' . $_GET['file'];
 
 /* Attempt at stopping tomfoolery */
@@ -7,7 +20,7 @@ if (strpos($file, '/../') !== false) exit;
 if (file_exists($file)) {
   header('Content-Description: File Transfer');
   header('Content-Type: application/octet-stream');
-  header('Content-Disposition: attachment; filename=' . basename($file));
+  header('Content-Disposition: attachment; filename=' . safe_basename($file));
   header('Content-Transfer-Encoding: binary');
   header('Expires: 0');
   header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
