@@ -30,6 +30,10 @@ a {
   color: #1A6868;
 }
 
+p {
+  text-align: justify;
+}
+
 select {
   border: none;
   padding: 4px;
