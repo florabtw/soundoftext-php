@@ -2,9 +2,9 @@
 
 var constants = {
     SERVER_DOWNLOAD_URL:
-        "https://ncpzvf.babbage.cs.missouri.edu/spoken/server-download.php",
+        "http://soundoftext.com/server-download.php",
     USER_DOWNLOAD_URL:
-        "https://ncpzvf.babbage.cs.missouri.edu/spoken/user-download.php?"
+        "http://soundoftext.com/user-download.php?"
 };
 
 /* Shortcut for document.getElementById */
@@ -94,7 +94,10 @@ function displayAudio(row, filePath) {
 
 function genAudio(filePath) {
     var source = document.createElement('source');
-    source.src = filePath;
+
+    /* Depends on a symbolic link 'audio' in the root directory that links to
+     * the directory containing audio files */
+    source.src = 'audio/' + filePath;
     source.type = 'audio/mp3';
 
     var audio = document.createElement('audio');

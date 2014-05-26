@@ -1,8 +1,8 @@
 <?php
-$file = $_GET['file'];
+$file = '/mnt/my-data/audio/' . $_GET['file'];
 
 /* Attempt at stopping tomfoolery */
-if ($file[0] == '.' || strpos($file, '/../') !== false) exit;
+if (strpos($file, '/../') !== false) exit;
 
 if (file_exists($file)) {
   header('Content-Description: File Transfer');
@@ -18,6 +18,6 @@ if (file_exists($file)) {
   readfile($file);
 } else {
   header('HTTP/1.0 404 Not Found');
-  echo 'File ' . $fileName . ' does not exist!';
+  echo 'File ' . basename($file) . ' does not exist!';
 }
 ?>
