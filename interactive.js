@@ -22,6 +22,15 @@ function addClass(element, newClass) {
     }
 }
 
+/* Encodes URI-important characters, but only in the name, not the path
+ * Dependent on path format of 'Language/filename.mp3' */
+function encodeAudioPath(path) {
+    var pathEnd = path.indexOf('/');
+    var pathWithoutFile = path.substr(0, pathEnd + 1);
+    var fileName = path.substr(pathEnd + 1);
+    return pathWithoutFile + encodeURIComponent(fileName);
+}
+
 /* Click 'submit' when pressing Enter in the input box */
 
 function keyPress(event) {
@@ -56,7 +65,7 @@ function submit() {
 
 function download(text, languageId, languageName) {
     var url = constants.SERVER_DOWNLOAD_URL
-    url += "?text=" + encodeURI(text) + "&id=" + languageId;
+    url += "?text=" + encodeURIComponent(text) + "&id=" + languageId;
     url += "&name=" + languageName;
 
     var xmlHttp = new XMLHttpRequest();
@@ -97,7 +106,7 @@ function genAudio(filePath) {
 
     /* Depends on a symbolic link 'audio' in the root directory that links to
      * the directory containing audio files */
-    source.src = 'audio/' + filePath;
+    source.src = 'audio/' + encodeAudioPath(filePath);
     source.type = 'audio/mp3';
 
     var audio = document.createElement('audio');

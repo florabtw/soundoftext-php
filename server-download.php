@@ -1,7 +1,10 @@
 <?php
 
 $text = strtolower(substr($_GET['text'], 0, 100));
+
+/* Bad form to save spaces in file names */
 $fileName = str_replace(' ', '_', $text);
+
 $language = $_GET['name'];
 $languageId = $_GET['id'];
 
