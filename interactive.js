@@ -24,7 +24,7 @@ function addClass(element, newClass) {
 
 /* Encodes URI-important characters, but only in the name, not the path
  * Dependent on path format of 'Language/filename.mp3' */
-function encodeAudioPath(path) {
+function encodeFileName(path) {
     var pathEnd = path.indexOf('/');
     var pathWithoutFile = path.substr(0, pathEnd + 1);
     var fileName = path.substr(pathEnd + 1);
@@ -106,7 +106,7 @@ function genAudio(filePath) {
 
     /* Depends on a symbolic link 'audio' in the root directory that links to
      * the directory containing audio files */
-    source.src = 'audio/' + encodeAudioPath(filePath);
+    source.src = 'audio/' + encodeFileName(filePath);
     source.type = 'audio/mp3';
 
     var audio = document.createElement('audio');
@@ -144,7 +144,7 @@ function genSaveButton(filePath) {
     addClass(btnSave, "btn-save");
 
     btnSave.href = constants.USER_DOWNLOAD_URL;
-    btnSave.href += "&file=" + filePath;
+    btnSave.href += "&file=" + encodeFileName(filePath);
 
     btnSave.appendChild(document.createTextNode("Save"));
     return btnSave;

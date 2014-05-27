@@ -5,6 +5,10 @@ $text = strtolower(substr($_GET['text'], 0, 100));
 /* Bad form to save spaces in file names */
 $fileName = str_replace(' ', '_', $text);
 
+/* Can't save forward slashes in file names
+ * '%2F' is URL encoding for '/' and will work appropriately with Translate */
+$fileName = str_replace('/', '%2F', $fileName);
+
 $language = $_GET['name'];
 $languageId = $_GET['id'];
 
