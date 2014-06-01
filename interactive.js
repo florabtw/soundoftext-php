@@ -2,9 +2,9 @@
 
 var constants = {
     SERVER_DOWNLOAD_URL:
-        "http://soundoftext.com/server-download.php",
+        "https://ncpzvf.babbage.cs.missouri.edu/sound-of-text/server-download.php",
     USER_DOWNLOAD_URL:
-        "http://soundoftext.com/user-download.php?"
+        "https://ncpzvf.babbage.cs.missouri.edu/sound-of-text/user-download.php"
 };
 
 /* Shortcut for document.getElementById */
@@ -144,7 +144,7 @@ function genSaveButton(filePath) {
     addClass(btnSave, "btn-save");
 
     btnSave.href = constants.USER_DOWNLOAD_URL;
-    btnSave.href += "&file=" + encodeFileName(filePath);
+    btnSave.href += "?file=" + encodeFileName(filePath);
 
     btnSave.appendChild(document.createTextNode("Save"));
     return btnSave;

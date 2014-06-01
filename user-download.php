@@ -12,7 +12,7 @@ function safe_basename($path) {
     return substr($name, 1);
 }
 
-$file = '/mnt/my-data/audio/' . $_GET['file'];
+$file = '/students/f/ncpzvf/mnt/my-data/audio/' . $_GET['file'];
 
 /* Attempt at stopping tomfoolery */
 if (strpos($file, '/../') !== false) exit;
