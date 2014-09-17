@@ -83,10 +83,11 @@ select {
   padding: 10px;
 }
 
-.contact-info {
+.links {
   width: 600px;
   margin: 0 auto;
   padding: 10px;
+  color: #1A6868;
 }
 
 /* Button styles */
