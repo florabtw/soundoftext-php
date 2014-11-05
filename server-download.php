@@ -16,7 +16,7 @@ if (strlen($fileName) == 0 || strlen($language) == 0) {
   exit;
 }
 
-$rootPath = '/students/f/ncpzvf/mnt/my-data/audio/';
+$rootPath = '/mnt/my-data/audio/';
 $relativePath = $language . '/' . $fileName . '.mp3';
 
 if (!file_exists($rootPath . $relativePath)) {
